@@ -1,8 +1,6 @@
 
 function [individuals] = geneticAlgorithim(generationNumber, rateMutation,beta, sigma, populationSize, K, Tp, L, phi)
    
-
-%     phiAllZeros é a hipermatriz populada com zeros
     phiAllZeros = zeros(K,Tp,L);
     fitnessNote = 0;
     chromosome = [];
@@ -15,58 +13,35 @@ function [individuals] = geneticAlgorithim(generationNumber, rateMutation,beta, 
 
 
 %     ############RUM GA############
-    %primeiraGeracao
-    disp("vou chamar firstGeneration");
-    
-    [g1] = firstGeneration(phiAllZeros);
-    function firstGeneration = firstGeneration(phiAllZeros)
-        disp("RUN FIRST GENERATION");
-%         disp(phiAllZeros);
-        
-%         disp("allZeros")
-%         disp(length(phiAllZeros))
-
-        for ell=1:length(phiAllZeros)
-%             q = list(range(0, len(phi[0])))
-%               q = list(range(0, len(phi[0])))
-%             np.random.shuffle(q)
-%             phi[range(0, len(phi[0])), q, ell] = 1
-%         return phi
-        end
-        firstGeneration = phiAllZeros;
-    end
-%     disp(g1)
-
     %inicializando population
     population = gaInitializeGeneration(populationSize, K, Tp, L, beta, sigma);
-        
+       
 %     disp(population(1).population);
 %     disp(population.fitness);
-
-       sumEvalutions = 0;
-       for s=1:populationSize
-           sumEvalutions = sumEvalutions + population(s).fitness;
-       end
-
-%        disp("SUM EVALUTIONS");
-%        disp(sumEvalutions);
-       
-
 
        
        newPopulation = [];
        for gerNum=1:generationNumber
            
+           sumEvalutions = 0;
+           for s=1:populationSize
+               sumEvalutions = sumEvalutions + population(s).fitness;
+           end
+           disp("SUM EVALUTIONS: " + sumEvalutions);
+           
            fitnessList = [];
-           popSwap = [];
+           childensSwap = [];
                       
             for individualGenerated = 1:2:populationSize
 
                 %-------------------------- ROLETA VICIADA --------------------------
-                father1 = gaRouletteVitiate(population, sumEvalutions, gerNum);
-                father2 = gaRouletteVitiate(population, sumEvalutions, gerNum);
-%                 disp("father 1 -> " + father1);
-%                 disp("father 2 -> " + father2);
+%                 father1 = gaRouletteVitiate(population, sumEvalutions, gerNum);
+%                 father2 = gaRouletteVitiate(population, sumEvalutions, gerNum);
+                
+                [father1, father2] = gaRouletteVitiated(population, sumEvalutions, gerNum);
+
+                disp("father 1 -> " + father1 + " individual: " + individualGenerated);
+                disp("father 2 -> " + father2 + " individual: " + individualGenerated);
                                
                  %-------------------------- CROSOVER--------------------------
                   individual1 = population(father1).population;
@@ -75,28 +50,27 @@ function [individuals] = geneticAlgorithim(generationNumber, rateMutation,beta, 
 %                   disp(individual1);
                   
                 [children1, children2] = GaCrossover(individual1, individual2);
-
                  
-                % populacao temporaria pós crossover
-                popSwap(individualGenerated).population = children1;     
-                popSwap(individualGenerated + 1).population = children2;
+                % individuos temporaria pós crossover
+                childensSwap(individualGenerated).population = children1;     
+                childensSwap(individualGenerated + 1).population = children2;
             end
 
             %-------------------------- MUTACAO --------------------------
-            phiMutated = GaMutation(popSwap, rateMutation);
+            indivudualMutated = GaMutation(childensSwap, rateMutation);
             
 %             RECALCULAR FITNESS (CORRIGIR)
-            for r=1:length(phiMutated)
+            for r=1:length(indivudualMutated)
                 temp = [];
-                for p=1:length(phiMutated(r))
+                for p=1:length(indivudualMutated(r))
                     
                     
 %                     phi(p) = fitness(gerNum(:, :, :, p), beta, sigma);
                     
 %                     phi(p) = fitness(phiMutated(r).hiperMatrix(:, :, :, p), beta, sigma);
 
-                    temp(p).population = phiMutated(r).hiperMatrix;
-                    temp(p).fitness = fitness(phiMutated(r).hiperMatrix(:, :, :, p), beta, sigma);
+                    temp(p).population = indivudualMutated(r).hiperMatrix;
+                    temp(p).fitness = fitness(indivudualMutated(r).hiperMatrix(:, :, :, p), beta, sigma);
                     
 %                     disp(temp(p).population);
                     disp("temp FITNESS ---> " + temp(p).fitness);
@@ -125,8 +99,8 @@ function [individuals] = geneticAlgorithim(generationNumber, rateMutation,beta, 
             disp("progress: " + (gerNum*100)/generationNumber + "% | geration: " + gerNum );
        end
        
-%        disp("bestFitness");
-%        disp(bestFitnessList);
+       disp("bestFitness");
+       disp(bestFitnessList);
  
        figure(2);
        plot(bestFitnessList);
