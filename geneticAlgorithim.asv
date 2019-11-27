@@ -102,9 +102,8 @@ function [individuals] = geneticAlgorithim(generationNumber, rateMutation,beta, 
        end
        
        disp("-------------- BEST OPTIMIZATION ---------------");
-       disp("Fitness: " + bestSolution.fitness);
-       disp("Generation: " +  bestSolution.generation);
-       disp("PilotSequence HIPERMATRIX: ");
+       disp("fitness: " + bestSolution.fitness);
+       disp(bestSolution.generation);
        disp(bestSolution.pilotSequenceOptimized);
        disp("-------------- BEST OPTIMIZATION ---------------");
  

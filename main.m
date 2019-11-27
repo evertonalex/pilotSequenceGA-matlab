@@ -260,7 +260,7 @@ phi = randomcandidate(phi);
 
 % Genetic Algorithim
 % GeneticAlgorithim - GA
-GENERATIONNUMBER = 4;
+GENERATIONNUMBER = 10;
 RATEMUTATION = 0.08;
 % CUTPOINT = 3; %PONTO DE CORTE DEFINIDO FIXO em GaCrosover
 populationSize = 4;
