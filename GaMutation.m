@@ -1,5 +1,5 @@
 
-function [phiMutated] = GaMutation(phi, rateMutation)
+function [individualMutated] = GaMutation(individual, rateMutation)
 
     celula = 1;
     
@@ -7,20 +7,20 @@ function [phiMutated] = GaMutation(phi, rateMutation)
     
 %     disp(mut)
 
-    for p=1:length(phi)
-        phiMut = phi(p).population;
+    for p=1:length(individual)
+        pilotSequence = individual(p).population;
         
         randonSequence = randi([0,1],1,1);
  
         if(randonSequence < rateMutation)
 %             disp("VOU MUTAR")
 
-            temp = phiMut(mut(1,2), :, celula);
-            phiMut(mut(1,2),:,celula) = phiMut(mut(1,1),:,celula);
-            phiMut(mut(1,1), :, celula) = temp;
+            temp = pilotSequence(mut(1,2), :, celula);
+            pilotSequence(mut(1,2),:,celula) = pilotSequence(mut(1,1),:,celula);
+            pilotSequence(mut(1,1), :, celula) = temp;
         end
         
-        phiMutated(p).hiperMatrix = phiMut;
+        individualMutated(p).hiperMatrix = pilotSequence;
     end
     
 %     phiMutated = phiMut;

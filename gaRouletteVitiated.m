@@ -1,13 +1,10 @@
 function [father1, father2] = gaRouletteVitiated(population, sumEvatuions, popCurrent)
     father1 = 1;
     father2 = 1;
-    
-    
-    
+        
     popSize = length(population);
     randomSort = sumEvatuions*rand(1, 'double');
-    
-    
+        
 %     disp("sumEvalution " + sumEvatuions);
 %     disp("randomSORTEIO 1 - " + randomSort);
 %     
