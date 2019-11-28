@@ -10,7 +10,7 @@ function [individuals] = geneticAlgorithim(generationNumber, rateMutation,beta, 
 %     ############RUM GA############
     %inicializando population
     population = gaInitializeGeneration(populationSize, K, Tp, L, beta, sigma);
-       
+           
 %     disp(population(1).population);
 %     disp(population.fitness);
 
@@ -41,8 +41,8 @@ function [individuals] = geneticAlgorithim(generationNumber, rateMutation,beta, 
 %                 disp("father 2 -> " + father2 + " individual: " + individualGenerated);
                                
                  %-------------------------- CROSOVER--------------------------
-                  individual1 = population(father1).population;
-                  individual2 = population(father2).population;                  
+                  individual1 = population(father1).hipermatrix;
+                  individual2 = population(father2).hipermatrix;                  
 %                   disp("individual1 - ");
 %                   disp(individual1);
                   
@@ -65,7 +65,7 @@ function [individuals] = geneticAlgorithim(generationNumber, rateMutation,beta, 
 %                     phi(p) = fitness(gerNum(:, :, :, p), beta, sigma);
 %                     phi(p) = fitness(phiMutated(r).hiperMatrix(:, :, :, p), beta, sigma);
 
-                    temp(p).population = indivudualMutated(r).hiperMatrix;
+                    temp(p).hipermatrix = indivudualMutated(r).hiperMatrix;
                     temp(p).fitness = fitness(indivudualMutated(r).hiperMatrix(:, :, :, p), beta, sigma);
                     
 %                     disp(temp(p).population);

@@ -19,9 +19,9 @@ function [initialPopulation] = gaInitializeGeneration(populationSize, K, Tp, L, 
         pop(:, :, :, p) = randomcandidate(pop(:, :, :, p));
         phi(p) = fitness(pop(:, :, :, p), beta, sigma);
         
-        population(p).population = [];
+        population(p).hipermatrix = [];
                
-        population(p).population = [population(p).population, pop];
+        population(p).hipermatrix = [population(p).hipermatrix, pop];
         population(p).fitness = phi(p);
     end
     
