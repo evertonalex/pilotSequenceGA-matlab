@@ -1,5 +1,5 @@
 
-function [individualMutated] = GaMutation(individual, rateMutation)
+function [individualMutated] = gaMutation(individual, rateMutation)
 
     celula = 1;
     

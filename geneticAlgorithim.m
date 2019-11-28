@@ -46,7 +46,7 @@ function [individuals] = geneticAlgorithim(generationNumber, rateMutation,beta, 
 %                   disp("individual1 - ");
 %                   disp(individual1);
                   
-                [children1, children2] = GaCrossover(individual1, individual2);
+                [children1, children2] = gaCrossover(individual1, individual2);
                  
                 % individuos temporaria pós crossover
                 childensSwap(individualGenerated).population = children1;     
@@ -54,7 +54,7 @@ function [individuals] = geneticAlgorithim(generationNumber, rateMutation,beta, 
             end
 
             %-------------------------- MUTACAO --------------------------
-            indivudualMutated = GaMutation(childensSwap, rateMutation);
+            indivudualMutated = gaMutation(childensSwap, rateMutation);
             
 %             RECALCULAR FITNESS (CORRIGIR)
             for r=1:length(indivudualMutated)

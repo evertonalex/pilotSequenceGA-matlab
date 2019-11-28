@@ -1,4 +1,4 @@
-function [children1, children2] = GaCrossover(individual, otherIndividual)
+function [children1, children2] = gaCrossover(individual, otherIndividual)
     children1 = [];
     children2 = [];
  
