@@ -109,10 +109,9 @@ function [individuals] = geneticAlgorithim(generationNumber, rateMutation,beta, 
                fitnessList = [fitnessList, newPopulation(pop).fitness]; 
 %                disp("repopulando FITNESS 1 --> " + newPopulation(pop).fitness);
             end
+             bestFitnessList = [bestFitnessList, max(fitnessList)];
             
-            
-            bestFitnessList = [bestFitnessList, max(fitnessList)];
-%             disp("-max fitness: " + max(fitnessList));
+            disp("-max fitness: " + max(fitnessList));
             
             population = newPopulation;
             
