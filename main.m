@@ -260,10 +260,10 @@ phi = randomcandidate(phi);
 
 % Genetic Algorithim
 % GeneticAlgorithim - GA
-GENERATIONNUMBER = 20;
+GENERATIONNUMBER = 50;
 RATEMUTATION = 0.08;
 % CUTPOINT = 3; %PONTO DE CORTE DEFINIDO FIXO em GaCrosover
-populationSize = 10;
+populationSize = 20;
 [gaResut] = geneticAlgorithim(GENERATIONNUMBER, RATEMUTATION, beta, N0*Bmax, populationSize, K, Tp, L);
 
 %Ploting Fitness Evolution

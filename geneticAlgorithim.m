@@ -80,7 +80,7 @@ function [individuals] = geneticAlgorithim(generationNumber, rateMutation,beta, 
                 index = 0;
                 [bestSolution.fitness, index] = max(fitnessList);
                 bestSolution.generation = gerNum;
-                bestSolution.pilotSequenceOptimized = newPopulation(index);
+                bestSolution.pilotSequenceOptimized = newPopulation(index).hipermatrix;
             else
                 %reinserir o melhor individuo na população caso o mesmo não
                 %sofra melhoras
@@ -95,12 +95,13 @@ function [individuals] = geneticAlgorithim(generationNumber, rateMutation,beta, 
 %                 disp("index ->" + index);
 %                 disp("min substituir ---> " + worseIndividual.fitness);
 %                 disp("por melhor fitness ---> " + bestSolution.fitness);
-%                 
+%                                
 %                 disp("----SUB PIOR INDIVIDUO ----")
                 %------prints para debug ---------
                 
                 newPopulation(index).fitness = bestSolution.fitness;
-                newPopulation(index).hipermatrix = newPopulation(index).hipermatrix;   
+                newPopulation(index).hipermatrix = bestSolution.pilotSequenceOptimized;
+
             end
             
             %repopulando bestFitness list
@@ -127,7 +128,7 @@ function [individuals] = geneticAlgorithim(generationNumber, rateMutation,beta, 
        disp("Fitness: " + bestSolution.fitness);
        disp("Generation: " +  bestSolution.generation);
        disp("PilotSequence HIPERMATRIX: ");
-       disp(bestSolution.pilotSequenceOptimized);
+%        disp(bestSolution.pilotSequenceOptimized);
        disp("-------------- BEST OPTIMIZATION ---------------");
  
        figure(2);

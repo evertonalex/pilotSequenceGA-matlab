@@ -80,7 +80,7 @@ function [individuals] = geneticAlgorithim(generationNumber, rateMutation,beta, 
                 index = 0;
                 [bestSolution.fitness, index] = max(fitnessList);
                 bestSolution.generation = gerNum;
-                bestSolution.pilotSequenceOptimized = newPopulation(index);
+                bestSolution.pilotSequenceOptimized = newPopulation(index).hipermatrx;
             else
                 %reinserir o melhor individuo na população caso o mesmo não
                 %sofra melhoras
@@ -90,17 +90,21 @@ function [individuals] = geneticAlgorithim(generationNumber, rateMutation,beta, 
                 [worseIndividual.fitness, index] = min(fitnessList);
                 
                 %------prints para debug ---------
-%                 disp("----SUB PIOR INDIVIDUO ----")
-%                 
-%                 disp("index ->" + index);
-%                 disp("min substituir ---> " + worseIndividual.fitness);
-%                 disp("por melhor fitness ---> " + bestSolution.fitness);
-%                 
-%                 disp("----SUB PIOR INDIVIDUO ----")
+                disp("----SUB PIOR INDIVIDUO ----")
+                
+                disp("index ->" + index);
+                disp("min substituir ---> " + worseIndividual.fitness);
+                disp("por melhor fitness ---> " + bestSolution.fitness);
+                disp(newPopulation(index).hipermatrix);
+                
+                disp("----SUB PIOR INDIVIDUO ----")
                 %------prints para debug ---------
                 
                 newPopulation(index).fitness = bestSolution.fitness;
-                newPopulation(index).hipermatrix = newPopulation(index).hipermatrix;   
+%                 newPopulation(index).hipermatrix = [];
+                 newPopulation(index).hipermatrix = bestSolution.pilotSequenceOptimized;
+
+%                 newPopulation(index).hipermatrix = bestSolution.pilotSequenceOptimized;
             end
             
             %repopulando bestFitness list
@@ -109,9 +113,10 @@ function [individuals] = geneticAlgorithim(generationNumber, rateMutation,beta, 
                fitnessList = [fitnessList, newPopulation(pop).fitness]; 
 %                disp("repopulando FITNESS 1 --> " + newPopulation(pop).fitness);
             end
-             bestFitnessList = [bestFitnessList, max(fitnessList)];
             
-            disp("-max fitness: " + max(fitnessList));
+            
+            bestFitnessList = [bestFitnessList, max(fitnessList)];
+%             disp("-max fitness: " + max(fitnessList));
             
             population = newPopulation;
             
